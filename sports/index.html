@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Sports Congo · elevate the game</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    /* RESET & BASE */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Inter", sans-serif;
+      background-color: #fcfaf5;
+      color: #1e2a2e;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      width: 100%;
+    }
+    :root {
+      --primary: #c4492c;
+      --primary-light: #e46b4e;
+      --secondary: #1b4d3f;
+      --secondary-light: #2a6e5a;
+      --gold: #e9b741;
+      --cream: #fcfaf5;
+      --dark: #1e2a2e;
+      --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+      --shadow-sm: 0 10px 25px -8px rgba(0, 0, 0, 0.1);
+    }
+    h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
+    h2 {
+      font-size: clamp(2rem, 5vw, 2.5rem);
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+    }
+    h2:after {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 70px;
+      height: 5px;
+      background: var(--gold);
+      border-radius: 8px;
+    }
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 clamp(16px, 4vw, 32px);
+    }
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* ===== RESPONSIVE NAVBAR with HAMBURGER ===== */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: clamp(16px, 3vw, 24px) clamp(16px, 4vw, 32px);
+      background: var(--cream);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      position: relative;
+      flex-wrap: wrap;
+    }
+    .logo {
+      font-size: clamp(1.5rem, 4vw, 1.8rem);
+      font-weight: 700;
+      color: var(--secondary);
+      letter-spacing: -0.02em;
+    }
+    .logo span { color: var(--primary); font-weight: 300; font-style: italic; }
+
+    /* mobile menu toggle */
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      color: var(--secondary);
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      transition: color 0.2s;
+    }
+    .menu-toggle:hover { color: var(--primary); }
+
+    .nav-links {
+      display: flex;
+      gap: clamp(1rem, 3vw, 2.5rem);
+      font-weight: 500;
+      align-items: center;
+      transition: all 0.3s ease-in-out;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      transition: 0.2s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      white-space: nowrap;
+    }
+    .nav-links a:hover { border-bottom-color: var(--primary); color: var(--primary); }
+
+    /* ===== HERO / BUTTONS / GRIDS (preserved & enhanced) ===== */
+    .btn {
+      display: inline-block;
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      font-weight: 600;
+      padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 28px);
+      border-radius: 60px;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      margin-right: 8px;
+      margin-bottom: 10px;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      box-shadow: 0 6px 12px rgba(196, 73, 44, 0.1);
+      text-align: center;
+      min-width: 160px;
+    }
+    .btn-primary { background: var(--primary); color: white; border-color: var(--primary); }
+    .btn-primary:hover { background: var(--primary-light); border-color: var(--primary-light); transform: translateY(-2px); box-shadow: 0 15px 25px -8px rgba(196, 73, 44, 0.3); }
+    .btn-outline:hover { background: var(--primary); color: white; }
+
+    .hero {
+      padding: clamp(40px, 8vw, 80px) 0;
+      background: linear-gradient(112deg, #fcfaf5 0%, #fff7ec 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero:before {
+      content: ""; position: absolute; top: -20%; right: -5%; width: min(400px, 80vw); height: min(400px, 80vw);
+      background: radial-gradient(circle, rgba(233, 183, 65, 0.15) 0%, transparent 70%); border-radius: 50%; z-index: 0;
+    }
+    .hero .container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(20px, 5vw, 40px);
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    .hero h1 { font-size: clamp(2.2rem, 6vw, 3.7rem); font-weight: 700; line-height: 1.1; color: var(--secondary); }
+    .hero h1 i { color: var(--primary); font-style: italic; }
+    .hero-sub { font-size: clamp(1rem, 2.5vw, 1.25rem); margin: clamp(16px, 3vw, 24px) 0 clamp(20px, 4vw, 32px); color: #2e3b40; }
+    .hero-img img {
+      width: 100%; height: auto; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; box-shadow: var(--shadow);
+      border: 4px solid white; object-fit: cover; aspect-ratio: 1/1; max-height: 500px; display: block;
+    }
+    .cta-group { margin-top: clamp(20px, 4vw, 30px); display: flex; flex-wrap: wrap; gap: 10px; }
+
+    section { padding: clamp(40px, 8vw, 80px) 0; }
+    .bg-soft { background: #fff8f2; }
+
+    /* about */
+    .about-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(30px, 6vw, 50px); align-items: center; }
+    .values { display: flex; flex-wrap: wrap; gap: 10px 15px; margin: 25px 0 0; }
+    .values span {
+      background: white; border-radius: 60px; padding: 6px 18px; font-weight: 600;
+      font-size: clamp(0.85rem, 2vw, 0.95rem); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+      border: 1px solid rgba(196, 73, 44, 0.2); color: var(--primary);
+    }
+    .about-img img { width: 100%; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; aspect-ratio: 1/1; object-fit: cover; }
+
+    /* services — now with tabs functionality (mobile/tablet friendly) */
+    .service-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      padding-bottom: 10px;
+    }
+    .tab-btn {
+      background: transparent;
+      border: none;
+      padding: 12px 24px;
+      font-weight: 600;
+      color: var(--dark);
+      cursor: pointer;
+      border-radius: 40px 40px 0 0;
+      transition: 0.2s;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      flex: 0 1 auto;
+    }
+    .tab-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+    .tab-pane {
+      display: none;
+      animation: fade 0.25s ease;
+    }
+    .tab-pane.active-pane { display: block; }
+    @keyframes fade { from { opacity:0.3; } to { opacity:1; } }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr));
+      gap: clamp(15px, 1vw, 20px);
+    }
+    .service-card {
+      background: white; padding: clamp(24px, 4vw, 32px) clamp(20px, 3vw, 24px); border-radius: 32px;
+      box-shadow: var(--shadow-sm); transition: all 0.2s; border: 1px solid #f0e2d4; height: 100%;
+    }
+    .service-card i { font-size: clamp(2rem, 5vw, 2.5rem); color: var(--primary); margin-bottom: 15px; }
+    .service-card h3 { font-size: clamp(1.2rem, 3vw, 1.4rem); margin-bottom: 12px; }
+
+    /* unity & news */
+    .unity-card {
+      background: linear-gradient(135deg, #1b4d3f 0%, #0e3329 100%);
+      color: white; border-radius: clamp(24px, 5vw, 48px); padding: clamp(24px, 5vw, 48px);
+      display: flex; flex-wrap: wrap; gap: clamp(20px, 5vw, 40px); align-items: center; margin-top: 30px; box-shadow: var(--shadow);
+    }
+    .unity-content { flex: 2 1 300px; }
+    .unity-content h3 { font-size: clamp(1.5rem, 4vw, 2.2rem); color: var(--gold); margin-bottom: 16px; }
+    .unity-flag-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 12px; margin: 20px 0; font-weight: 600; }
+    .unity-flag-grid span { background: rgba(255,255,255,0.1); padding: 6px 8px; border-radius: 40px; text-align: center; backdrop-filter: blur(4px); font-size: clamp(0.85rem, 2vw, 0.95rem); }
+    .unity-img { flex: 1 1 250px; }
+    .unity-img img { width: 100%; border-radius: 32px; border: 4px solid var(--gold); aspect-ratio: 4/3; object-fit: cover; }
+    .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 25px; }
+    .news-item { background: white; border-radius: 32px; padding: clamp(24px, 4vw, 32px); box-shadow: var(--shadow-sm); }
+
+    /* contact */
+    .contact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(20px, 5vw, 40px); background: white; border-radius: clamp(32px, 6vw, 56px); padding: clamp(24px, 5vw, 56px); box-shadow: var(--shadow); }
+    .contact-info p { margin: 15px 0; font-size: clamp(1rem, 2.5vw, 1.2rem); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .contact-info i { width: 30px; color: var(--primary); font-size: 1.2rem; }
+    .contact-img img { width: 100%; border-radius: 32px; object-fit: cover; aspect-ratio: 1/1; }
+
+    footer { background: var(--dark); color: #bbb; text-align: center; padding: clamp(24px, 5vw, 32px); font-size: 0.9rem; }
+
+    /* ===== RESPONSIVE BREAKPOINTS + MOBILE MENU ===== */
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: var(--cream);
+        padding: 20px 0 10px;
+        gap: 1rem;
+        border-top: 1px solid rgba(0,0,0,0.05);
+        margin-top: 16px;
+      }
+      .nav-links.show { display: flex; }
+      .nav-links a { width: 100%; text-align: center; padding: 10px; white-space: normal; }
+    }
+
+    @media (max-width: 900px) {
+      .hero .container, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .hero .container { gap: 40px; }
+      .hero-img, .contact-img { max-width: 500px; margin: 0 auto; }
+    }
+
+    @media (max-width: 600px) {
+      .btn { width: 100%; margin-right: 0; }
+      .cta-group { flex-direction: column; }
+      .values { justify-content: center; }
+      .unity-flag-grid { grid-template-columns: repeat(2,1fr); }
+      .unity-flag-grid span { white-space: normal; }
+    }
+    @media (max-width: 380px) {
+      .unity-flag-grid { grid-template-columns: 1fr; }
+    }
+    @media (hover:hover) { .service-card:hover { transform: translateY(-5px); } }
+
+    /* fix image fallback */
+    img { max-width: 100%; height: auto; display: block; }
+  </style>
+</head>
+<body>
+  <!-- NAVIGATION with hamburger toggle -->
+  <nav class="navbar">
+    <div class="logo">SPORTS <span>CONGO</span></div>
+    <button class="menu-toggle" id="menuToggle" aria-label="menu"><i class="fas fa-bars"></i></button>
+    <div class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="home">
+    <div class="container">
+      <div>
+        <h1>Empowering Congo’s Sports to <i>Shine</i> on the Global Stage</h1>
+        <p class="hero-sub">Sports Congo is driving the rise of Congolese sports on the international scene — through strategic partnerships, event representation, and commercialization of national talent.</p>
+        <div class="cta-group">
+          <a href="#" class="btn btn-primary">Partner With Us</a>
+          <a href="#" class="btn btn-outline">Explore Unity Cup 2026</a>
+          <a href="#" class="btn btn-outline">Contact Our Team</a>
+        </div>
+      </div>
+      <div class="hero-img">
+        <img src="images/DRC.jpg" alt="DRC football celebration" loading="eager"
+          onerror="this.src='https://images.pexels.com/photos/159711/pexels-photo-159711.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop'">
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section class="bg-soft" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <h2>Our Story</h2>
+          <p style="font-size: clamp(1rem, 2.5vw, 1.2rem); margin-bottom:24px;">Sports Congo was founded to transform how the Democratic Republic of Congo engages with global sports. We connect the dots between government, brands, federations, and media to ensure Congolese sports thrive commercially and globally.</p>
+          <div style="display:flex; gap:clamp(20px,4vw,30px); flex-wrap:wrap; margin:25px 0;">
+            <div><strong style="color:var(--primary)">Mission</strong><br>Elevate DRC’s image through impactful sports participation.</div>
+            <div><strong style="color:var(--primary)">Vision</strong><br>Leading sports commercialization in Africa.</div>
+          </div>
+          <div class="values"><span>Excellence</span><span>Partnership</span><span>National Pride</span><span>Transparency</span><span>Innovation</span></div>
+        </div>
+        <div class="about-img">
+          <img src="https://images.pexels.com/photos/1752757/pexels-photo-1752757.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop" alt="Team huddle DRC" loading="lazy"
+            onerror="this.src='https://images.pexels.com/photos/358042/pexels-photo-358042.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop'">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES SECTION with TABS (mobile & desktop) -->
+  <section id="services">
+    <div class="container">
+      <h2>Our services</h2>
+      <!-- tabs navigation -->
+      <div class="service-tabs">
+        <button class="tab-btn active" data-tab="tab1">Commercial</button>
+        <button class="tab-btn" data-tab="tab2">Events</button>
+        <button class="tab-btn" data-tab="tab3">Media</button>
+        <button class="tab-btn" data-tab="tab4">Partnerships</button>
+        <button class="tab-btn" data-tab="tab5">Youth</button>
+      </div>
+
+      <!-- tab panes -->
+      <div class="tab-pane active-pane" id="tab1">
+        <div class="service-grid">
+          <div class="service-card"><i class="fas fa-chart-line"></i><h3>Sports Commercialization</h3><p>Sponsorship structuring, broadcast rights, and brand activations.</p></div>
+          <div class="service-card"><i class="fas fa-trophy"></i><h3>Sponsorship</h3><p>Connect brands with teams for mutual growth.</p></div>
+        </div>
+      </div>
+      <div class="tab-pane" id="tab2">
+        <div class="service-grid">
+          <div class="service-card"><i class="fas fa-flag-checkered"></i><h3>Event Representation</h3><p>Facilitating DRC’s participation in international tournaments.</p></div>
+          <div class="service-card"><i class="fas fa-calendar-alt"></i><h3>Tournament management</h3><p>End-to-end event logistics.</p></div>
+        </div>
+      </div>
+      <div class="tab-pane" id="tab3">
+        <div class="service-grid">
+          <div class="service-card"><i class="fas fa-video"></i><h3>Media & Content</h3><p>Documentaries, highlight reels, digital campaigns.</p></div>
+          <div class="service-card"><i class="fas fa-broadcast-tower"></i><h3>Broadcast</h3><p>Live production and distribution.</p></div>
+        </div>
+      </div>
+      <div class="tab-pane" id="tab4">
+        <div class="service-grid">
+          <div class="service-card"><i class="fas fa-handshake"></i><h3>Brand Partnerships</h3><p>Aligning global brands with DRC’s sports vision.</p></div>
+          <div class="service-card"><i class="fas fa-leaf"></i><h3>CSR integration</h3><p>Purpose-driven collaborations.</p></div>
+        </div>
+      </div>
+      <div class="tab-pane" id="tab5">
+        <div class="service-grid">
+          <div class="service-card"><i class="fas fa-child"></i><h3>Youth Development</h3><p>Programs nurturing the next generation of athletes.</p></div>
+          <div class="service-card"><i class="fas fa-school"></i><h3>Academies</h3><p>Structured training & scholarships.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS SECTION -->
+  <section class="bg-soft" id="projects">
+    <div class="container">
+      <h2>Flagship project</h2>
+      <div class="unity-card">
+        <div class="unity-content">
+          <h3>Unity Cup Francophone Edition 2026</h3>
+          <p>An 8-team football tournament featuring top national teams from:</p>
+          <div class="unity-flag-grid"><span>🇨🇩 DRC</span><span>🇸🇳 Senegal</span><span>🇨🇲 Cameroon</span><span>🇨🇮 Ivory Coast</span><span>🇲🇱 Mali</span><span>🇬🇦 Gabon</span><span>🇧🇫 Burkina Faso</span><span>🇳🇪 Niger</span></div>
+          <p style="margin-top:16px">Hosted in <strong>France</strong>, bringing together Africa's finest footballing nations and providing unmatched exposure for the DRC National Team.</p>
+          <a href="#" class="btn btn-primary" style="margin-top:20px">Explore tournament</a>
+        </div>
+        <div class="unity-img">
+          <img src="https://images.pexels.com/photos/3621104/pexels-photo-3621104.jpeg?auto=compress&cs=tinysrgb&w=600&h=450&fit=crop" alt="Unity Cup trophy celebration" loading="lazy"
+            onerror="this.src='https://images.pexels.com/photos/47392/pexels-photo-47392.jpeg?auto=compress&cs=tinysrgb&w=600&h=450&fit=crop'">
+        </div>
+      </div>
+      <!-- News & Media -->
+      <div style="margin-top:60px">
+        <h2>News & Media</h2>
+        <div class="news-grid">
+          <div class="news-item"><i class="fas fa-newspaper"></i><h3>Partnership with Canal+</h3><p>DRC Leopards matches to be broadcast across 26 countries.</p></div>
+          <div class="news-item"><i class="fas fa-podcast"></i><h3>Inside: Unity Cup draw</h3><p>Exclusive behind the scenes as Senegal joins the group.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h2 style="margin-bottom:20px">Let's Build Congo's Sporting Future Together</h2>
+          <p><i class="fas fa-map-pin"></i> Kinshasa, Democratic Republic of Congo</p>
+          <p><i class="fas fa-envelope"></i> info@sportscongo.com</p>
+          <p><i class="fas fa-phone-alt"></i> +243 812 345 678</p>
+          <p><i class="far fa-clock"></i> Mon–Fri: 9AM – 6PM</p>
+          <div style="margin-top:25px"><a href="#" class="btn btn-primary">Contact our team</a></div>
+        </div>
+        <div class="contact-img">
+          <img src="images/download.jpg" alt="Kinshasa landscape" loading="lazy"
+            onerror="this.src='https://images.pexels.com/photos/276528/pexels-photo-276528.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop'">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 SPORTS CONGO — Elevating the game. All rights reserved.</p>
+  </footer>
+
+  <script>
+    (function() {
+      // Hamburger menu
+      const toggleBtn = document.getElementById('menuToggle');
+      const navLinks = document.getElementById('navLinks');
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+          navLinks.classList.toggle('show');
+          const icon = toggleBtn.querySelector('i');
+          if (icon) icon.classList.toggle('fa-times');
+        });
+      }
+
+      // Tabs logic
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      const panes = document.querySelectorAll('.tab-pane');
+      if (tabBtns.length) {
+        tabBtns.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const tabId = btn.getAttribute('data-tab');
+            tabBtns.forEach(b => b.classList.remove('active'));
+            panes.forEach(p => p.classList.remove('active-pane'));
+            btn.classList.add('active');
+            document.getElementById(tabId).classList.add('active-pane');
+          });
+        });
+      }
+
+      // Smooth scroll + close menu on link click (mobile)
+      const links = document.querySelectorAll('.nav-links a');
+      links.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href').substring(1);
+          const target = document.getElementById(targetId);
+          if (target) target.scrollIntoView({ behavior: 'smooth' });
+          if (navLinks.classList.contains('show')) {
+            navLinks.classList.remove('show');
+            const icon = toggleBtn.querySelector('i');
+            if (icon) icon.classList.remove('fa-times');
+          }
+        });
+      });
+
+      // CTA demo
+      const primaryCTA = document.querySelector('.btn-primary');
+      if (primaryCTA) {
+        primaryCTA.addEventListener('click', (e) => {
+          e.preventDefault();
+          alert('🤝 Thank you for your interest! Our team in Kinshasa will reach out soon.');
+        });
+      }
+
+      console.log('🇨🇩 Sports Congo — responsive + tabs + mobile menu ready');
+    })();
+  </script>
+</body>
+</html>
